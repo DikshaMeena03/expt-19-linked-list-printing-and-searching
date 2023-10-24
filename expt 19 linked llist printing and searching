@@ -1,0 +1,94 @@
+#include <iostream>
+using namespace std;
+//singly linked list
+
+class node{
+public:
+    int data;
+    node* next;
+
+   node(int data){
+      this ->data = data;
+     this ->next = NULL;
+    }
+
+    ~node(){
+        int value = this->data;
+        if(this->next!= NULL){
+            delete next;
+            this->next =NULL;
+        }
+    }
+};
+
+void insertathead(node* &head, int d){
+  node* temp = new node(d);
+  temp ->next = head;
+  head = temp;
+}
+
+void insertattail(node* &tail,int d){
+   node* temp = new node(d);
+   tail->next = temp;
+   tail = temp;
+}
+
+void print(node* &head){
+    node* temp = head;
+    while(temp != NULL){
+        cout<<temp->data<<" "<<endl;
+        temp =temp->next;
+    }
+}
+void insertatposition(node* &head, int position, int d){
+  node* temp = head;
+  int cnt = 1;
+
+while(cnt<position-1){
+        temp= temp->next;
+         cnt++;
+        }
+         node* nodetoinsert = new node(d);
+         nodetoinsert->next =temp->next;
+         temp->next = nodetoinsert;
+}
+
+bool search(node* head, int x)
+{
+    node* cnt = head;
+    while (cnt != NULL)
+    {
+        if (cnt->data == x)
+            return true;
+        cnt = cnt->next;
+    }
+    return false;
+}
+
+int main(){
+
+   node*node1 = new node(5);
+   cout<<node1->data<<endl;
+   cout<<node1->next<<endl;
+   int x = 13;
+
+node*head =node1;
+node*tail =node1;
+
+//print(head);
+
+insertathead(head, 12);
+//print(head);
+insertattail(tail, 13);
+//print(head);
+insertathead(head, 14);
+print(head);
+insertatposition(head,2,10);
+print(head);
+
+ search(head, 13)? cout<<"Yes element is found" : cout<<"No";
+
+//deletenode(1,head);
+//print(head);
+   return 0;
+}
